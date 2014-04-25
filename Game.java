@@ -93,6 +93,8 @@ public class Game
         System.out.println("Thank you for playing.  Good bye.");
     }
     private void printLocationInfo(){
+        System.out.println(currentRoom.getDescription());
+        System.out.print("Exits: ");
          if(currentRoom.northExit != null) {
             System.out.print("north ");
         }
@@ -123,8 +125,7 @@ public class Game
         System.out.println();
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        System.out.println(currentRoom.getDescription());
-        //System.out.print("Exits: ");
+        
         printLocationInfo();
     }
 
@@ -205,9 +206,7 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
-            currentRoom = nextRoom;
-            System.out.println( currentRoom.getDescription());
-            System.out.print("Exits: ");
+            currentRoom = nextRoom;        
             printLocationInfo();
         }
     }
