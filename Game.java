@@ -19,7 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -34,23 +34,45 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
-      
+        //Room outside, theater, pub, lab, office;
+        Room turquesa, azul, rojo, granate, verdeClaro,verdeOscuro,rosa, morado, neutro;
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
+        /**outside = new Room("outside the main entrance of the university");
         theater = new Room("in a lecture theater");
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
-        
+
         // initialise room exits
         outside.setExits(null, theater, lab, pub);
         theater.setExits(null, null, null, outside);
         pub.setExits(null, outside, null, null);
         lab.setExits(outside, office, null, null);
-        office.setExits(null, null, null, lab);
+        office.setExits(null, null, null, lab);*/
 
-        currentRoom = outside;  // start game outside
+        //currentRoom = outside;  // start game outside
+        turquesa=new Room("Estoy el entorno azul turquesa, hay dos personas sentadas ¡pero no tienen sillas!");
+        azul=new Room("Estoy en el entorno azul, hay dos sillas vacias");
+        rojo=new Room("Estoy en el entorno rojo,me duelen los ojos y hay una mesa vacia");
+        verdeClaro=new Room("Estoy en el entorno verde claro, ¡hay dos tazas de cafe pegadas al techo !");
+        verdeOscuro=new Room("Estoy en el entorno verde oscuro, hay una jarra llena de cafe...¡Suspendida en el aire!");
+        rosa=new Room("Este es un entorno rosa y horrible, hay un camarero descalzo");
+        morado=new Room("Estoy en el entorno morado, hay un cuadro cortado a la mitad");
+        neutro=new Room("Esto parece normal, pero no hay nada aparte de unos zapatos");
+        granate=new Room("Estoy en el entorno morado, aqui esta la otra mitad del cuadro");
+
+        turquesa.setExits(neutro, null, azul, null);
+        azul.setExits(turquesa, null, null, null);
+        rojo.setExits(null, granate, null, neutro);
+        neutro.setExits(verdeClaro,rojo,turquesa,rosa);
+        verdeClaro.setExits(verdeOscuro, null, neutro, null);
+        verdeOscuro.setExits(null, null, verdeClaro, null);
+        rosa.setExits(null, neutro, null, morado);
+        morado.setExits(null, rosa, null, null);
+        granate.setExits(null,null , null, rojo);
+        
+         currentRoom = neutro;  
+
     }
 
     /**
@@ -62,7 +84,7 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-                
+
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
@@ -77,12 +99,17 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Bienvenido World of Zuul!");
+        System.out.println("World of Zuul, persigues a un mago que te ha robado un amuleto");
+        System.out.println("para que no consigas atraparlo ha congelado el tiempo");
+        System.out.println("Al hacerlo la realidad se fragmento y debo reunir los objetos ");
+        System.out.println("que encuentre para recomponer la situacion a su forma previa,  ");
+        System.out.println("así el tiempo volvera a desbloquearse");
+        System.out.println();
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        System.out.println("You are " + currentRoom.getDescription());
-        System.out.print("Exits: ");
+        System.out.println(currentRoom.getDescription());
+        //System.out.print("Exits: ");
         if(currentRoom.northExit != null) {
             System.out.print("north ");
         }
@@ -176,7 +203,7 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
-            System.out.println("You are " + currentRoom.getDescription());
+            System.out.println( currentRoom.getDescription());
             System.out.print("Exits: ");
             if(currentRoom.northExit != null) {
                 System.out.print("north ");
