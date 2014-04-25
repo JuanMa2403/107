@@ -92,7 +92,7 @@ public class Game
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
-    public void printLocationInfo(){
+    private void printLocationInfo(){
          if(currentRoom.northExit != null) {
             System.out.print("north ");
         }
