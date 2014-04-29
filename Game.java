@@ -59,19 +59,19 @@ public class Game
         rosa=new Room("Este es un entorno rosa y horrible, hay un camarero descalzo");
         morado=new Room("Estoy en el entorno morado, hay un cuadro cortado a la mitad");
         neutro=new Room("Esto parece normal, pero no hay nada aparte de unos zapatos");
-        granate=new Room("Estoy en el entorno morado, aqui esta la otra mitad del cuadro");
+        granate=new Room("Estoy en el entorno morado claro, aqui esta la otra mitad del cuadro");
 
-        turquesa.setExits(neutro, null, azul, null);
-        azul.setExits(turquesa, null, null, null);
-        rojo.setExits(null, granate, null, neutro);
-        neutro.setExits(verdeClaro,rojo,turquesa,rosa);
-        verdeClaro.setExits(verdeOscuro, null, neutro, null);
-        verdeOscuro.setExits(null, null, verdeClaro, null);
-        rosa.setExits(null, neutro, null, morado);
-        morado.setExits(null, rosa, null, null);
-        granate.setExits(null,null , null, rojo);
-        
-         currentRoom = neutro;  
+        turquesa.setExits(neutro, null, azul, null,rosa,rojo,null,null);
+        azul.setExits(turquesa, null, null, null,granate,morado,null,null);
+        rojo.setExits(null, granate, null, neutro,null,verdeClaro,turquesa,null);
+        neutro.setExits(verdeClaro,rojo,turquesa,rosa,null,null,null,null);
+        verdeClaro.setExits(verdeOscuro, null, neutro, null,null,null,rosa,rojo);
+        verdeOscuro.setExits(null, null, verdeClaro, null,null,null,morado,granate);
+        rosa.setExits(null, neutro, null, morado,verdeClaro,null,null,turquesa);
+        morado.setExits(null, rosa, null, null,verdeOscuro,null,null,azul);
+        granate.setExits(null,null , null, rojo,null,verdeOscuro,azul,null);
+
+        currentRoom = neutro;  
 
     }
 
@@ -92,10 +92,11 @@ public class Game
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
+
     private void printLocationInfo(){
         System.out.println(currentRoom.getDescription());
         System.out.print("Exits: ");
-         if(currentRoom.northExit != null) {
+        if(currentRoom.northExit != null) {
             System.out.print("north ");
         }
         if(currentRoom.eastExit != null) {
@@ -106,6 +107,19 @@ public class Game
         }
         if(currentRoom.westExit != null) {
             System.out.print("west ");
+        }
+        
+        if(currentRoom.suresteSale!= null){
+            System.out.print("sureste");
+        }
+        if(currentRoom.noresteSale!= null){
+            System.out.print("noreste");
+        }
+        if(currentRoom.suroesteSale!= null){
+            System.out.print("suroeste");
+        }
+        if(currentRoom.noroesteSale!= null){
+            System.out.print("noroeste");
         }
         System.out.println();
     }
@@ -125,7 +139,7 @@ public class Game
         System.out.println();
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        
+
         printLocationInfo();
     }
 
@@ -194,6 +208,18 @@ public class Game
         }
         if(direction.equals("east")) {
             nextRoom = currentRoom.eastExit;
+        }
+        if(direction.equals("sureste")){
+            nextRoom=currentRoom.suresteSale;
+        }
+        if(direction.equals("noreste")){
+            nextRoom=currentRoom.noresteSale;
+        }
+        if(direction.equals("suroeste")){
+            nextRoom=currentRoom.suroesteSale;
+        }
+        if(direction.equals("noroeste")){
+            nextRoom=currentRoom.noroesteSale;
         }
         if(direction.equals("south")) {
             nextRoom = currentRoom.southExit;
