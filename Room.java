@@ -69,6 +69,19 @@ public class Room
     {
         return description;
     }
+    public String getExitString()
+    {   String lasSalidas=" ";
+        
+        String[] salidas={" Norte"," Sur"," Este"," Oeste"," Sureste"," Suroeste"," Noreste"," Noroeste"};
+        Room[] salidasDeroom={northExit,southExit,eastExit,westExit,suresteSale,suroesteSale,noresteSale,noroesteSale};
+       
+        for(int i=0;i<salidasDeroom.length;i++){
+            if(salidasDeroom[i]!=null){
+                lasSalidas=lasSalidas + salidas[i];
+            }
+        }
+        return lasSalidas;
+    }
     public Room getExits(String salida)
     {
         Room salidaDeRoom=null;
