@@ -96,30 +96,30 @@ public class Game
     private void printLocationInfo(){
         System.out.println(currentRoom.getDescription());
         System.out.print("Exits: ");
-        if(currentRoom.northExit != null) {
+        if(currentRoom.getExits("north") != null) {
             System.out.print("north ");
         }
-        if(currentRoom.eastExit != null) {
+        if(currentRoom.getExits("east")!= null) {
             System.out.print("east ");
         }
-        if(currentRoom.southExit != null) {
+        if(currentRoom.getExits("south") != null) {
             System.out.print("south ");
         }
-        if(currentRoom.westExit != null) {
+        if(currentRoom.getExits("west")!= null) {
             System.out.print("west ");
         }
         
-        if(currentRoom.suresteSale!= null){
-            System.out.print("sureste");
+        if(currentRoom.getExits("sureste")!= null){
+            System.out.print("sureste ");
         }
-        if(currentRoom.noresteSale!= null){
-            System.out.print("noreste");
+        if(currentRoom.getExits("noreste")!= null){
+            System.out.print("noreste ");
         }
-        if(currentRoom.suroesteSale!= null){
-            System.out.print("suroeste");
+        if(currentRoom.getExits("suroeste")!= null){
+            System.out.print("suroeste ");
         }
-        if(currentRoom.noroesteSale!= null){
-            System.out.print("noroeste");
+        if(currentRoom.getExits("noroeste")!= null){
+            System.out.print("noroeste ");
         }
         System.out.println();
     }
@@ -204,28 +204,28 @@ public class Game
         // Try to leave current room.
         Room nextRoom = null;
         if(direction.equals("north")) {
-            nextRoom = currentRoom.northExit;
+            nextRoom = currentRoom.getExits(direction);
         }
         if(direction.equals("east")) {
-            nextRoom = currentRoom.eastExit;
+            nextRoom = currentRoom.getExits(direction);
         }
         if(direction.equals("sureste")){
-            nextRoom=currentRoom.suresteSale;
+          nextRoom = currentRoom.getExits(direction);
         }
         if(direction.equals("noreste")){
-            nextRoom=currentRoom.noresteSale;
+            nextRoom = currentRoom.getExits(direction);
         }
         if(direction.equals("suroeste")){
-            nextRoom=currentRoom.suroesteSale;
+            nextRoom = currentRoom.getExits(direction);
         }
         if(direction.equals("noroeste")){
-            nextRoom=currentRoom.noroesteSale;
+            nextRoom = currentRoom.getExits(direction);
         }
         if(direction.equals("south")) {
-            nextRoom = currentRoom.southExit;
+            nextRoom = currentRoom.getExits(direction);
         }
         if(direction.equals("west")) {
-            nextRoom = currentRoom.westExit;
+            nextRoom = currentRoom.getExits(direction);
         }
 
         if (nextRoom == null) {
