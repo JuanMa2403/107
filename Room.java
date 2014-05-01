@@ -49,7 +49,7 @@ public class Room
     public void setExits(Room north, Room east, Room south, Room west,Room NE,Room NO,Room SO,Room SE) 
     {     
         if(north != null)
-           mapDesalidas.put("north", north);
+            mapDesalidas.put("north", north);
         if(east != null)          
             mapDesalidas.put("east", east);
         if(south != null)
@@ -61,15 +61,17 @@ public class Room
         if(NO != null)
             mapDesalidas.put("noroeste", NO);
         if(SE != null)
-             mapDesalidas.put("sureste", SE);
+            mapDesalidas.put("sureste", SE);
         if(SO != null)
             mapDesalidas.put("suroeste", SO);
 
     }
+
     public void setExit(String clave,Room estancia)
     {
         mapDesalidas.put(clave, estancia);
     }
+
     /**
      * @return The description of the room.
      */
@@ -78,10 +80,24 @@ public class Room
         return description;
     }
 
+    /**
+     * Return a long description of this room, of the form:
+     *     You are in the 'name of room'
+     *     Exits: north west southwest
+     * @return A description of the room, including exits.
+     */
+    public String getLongDescription()
+    {
+        String describe="";
+        System.out.println("Estoy en: ");
+        System.out.println("Salidas: ");
+        
+        return "Estoy en " +getDescription()+ ".\n" +"Salidas:";
+    }
+
     public String getExitString()
     {   String lasSalidas=" ";
         Set <String> salidas=mapDesalidas.keySet();
-       
 
         for(String sal:salidas){
             lasSalidas+=sal+" ";
@@ -92,30 +108,30 @@ public class Room
     public Room getExits(String salida)
     {
         //Room salidaDeRoom=null;
-/*
+        /*
         if(salida.equals("north")){
-            salidaDeRoom=mapDesalidas.get("north");
+        salidaDeRoom=mapDesalidas.get("north");
         }
         if(salida.equals("east")){
-            salidaDeRoom=mapDesalidas.get("east");
+        salidaDeRoom=mapDesalidas.get("east");
         }
         if(salida.equals("sureste")){
-            salidaDeRoom=mapDesalidas.get("sureste");
+        salidaDeRoom=mapDesalidas.get("sureste");
         }
         if(salida.equals("noreste")){
-           salidaDeRoom=mapDesalidas.get("noreste");
+        salidaDeRoom=mapDesalidas.get("noreste");
         }
         if(salida.equals("suroeste")){
-            salidaDeRoom=mapDesalidas.get("suroeste");
+        salidaDeRoom=mapDesalidas.get("suroeste");
         }
         if(salida.equals("noroeste")){
-            salidaDeRoom=mapDesalidas.get("noroeste");
+        salidaDeRoom=mapDesalidas.get("noroeste");
         }
         if(salida.equals("south")){
-            salidaDeRoom=mapDesalidas.get("south");
+        salidaDeRoom=mapDesalidas.get("south");
         }
         if(salida.equals("west")){
-            salidaDeRoom=mapDesalidas.get("west");
+        salidaDeRoom=mapDesalidas.get("west");
         }    */
 
         return mapDesalidas.get(salida);

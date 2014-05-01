@@ -36,8 +36,8 @@ public class Game
     {
         //Room outside, theater, pub, lab, office;
         Room turquesa, azul, rojo, granate, verdeClaro,verdeOscuro,rosa, morado, neutro;
-        // create the rooms
-        //currentRoom = outside;  // start game outside
+        // create the rooms       
+        /*
         turquesa=new Room("Estoy el entorno azul turquesa, hay dos personas sentadas ¡pero no tienen sillas!");
         azul=new Room("Estoy en el entorno azul, hay dos sillas vacias");
         rojo=new Room("Estoy en el entorno rojo,me duelen los ojos y hay una mesa vacia");
@@ -45,8 +45,19 @@ public class Game
         verdeOscuro=new Room("Estoy en el entorno verde oscuro, hay una jarra llena de cafe...¡Suspendida en el aire!");
         rosa=new Room("Este es un entorno rosa y horrible, hay un camarero descalzo");
         morado=new Room("Estoy en el entorno morado, hay un cuadro cortado a la mitad");
-        neutro=new Room("Esto parece normal, pero no hay nada aparte de unos zapatos");
-        granate=new Room("Estoy en el entorno morado claro, aqui esta la otra mitad del cuadro");
+        neutro=new Room(" parece normal, pero no hay nada aparte de unos zapatos");
+        granate=new Room("Estoy en el entorno morado claro, aqui esta la otra mitad del cuadro");*/
+        
+        
+        turquesa=new Room(" el entorno azul turquesa ");
+        azul=new Room(" el entorno azul ");
+        rojo=new Room(" el entorno rojo ");
+        verdeClaro=new Room(" el entorno verde claro ");
+        verdeOscuro=new Room(" el entorno verde oscuro ");
+        rosa=new Room(" el entorno rosa ");
+        morado=new Room(" el entorno morado ");
+        neutro=new Room(" el lugar original ");
+        granate=new Room(" el entorno morado claro ");
         
         
         neutro.setExit("north", verdeClaro);
@@ -125,9 +136,8 @@ public class Game
         System.out.println("Thank you for playing.  Good bye.");
     }
 
-    private void printLocationInfo(){
-        System.out.println(currentRoom.getDescription());
-        System.out.print("Exits: " + currentRoom.getExitString());      
+    private void printLocationInfo(){       
+        System.out.print(currentRoom.getLongDescription() + currentRoom.getExitString());      
         System.out.println();
     }
 
