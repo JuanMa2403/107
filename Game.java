@@ -34,19 +34,21 @@ public class Game
      */
     private void createRooms()
     {
-        //Room outside, theater, pub, lab, office;
+      
         Room turquesa, azul, rojo, granate, verdeClaro,verdeOscuro,rosa, morado, neutro;
         // create the rooms       
-        /*
-        turquesa=new Room("Estoy el entorno azul turquesa, hay dos personas sentadas ¡pero no tienen sillas!");
-        azul=new Room("Estoy en el entorno azul, hay dos sillas vacias");
-        rojo=new Room("Estoy en el entorno rojo,me duelen los ojos y hay una mesa vacia");
-        verdeClaro=new Room("Estoy en el entorno verde claro, ¡hay dos tazas de cafe pegadas al techo !");
-        verdeOscuro=new Room("Estoy en el entorno verde oscuro, hay una jarra llena de cafe...¡Suspendida en el aire!");
-        rosa=new Room("Este es un entorno rosa y horrible, hay un camarero descalzo");
-        morado=new Room("Estoy en el entorno morado, hay un cuadro cortado a la mitad");
-        neutro=new Room(" parece normal, pero no hay nada aparte de unos zapatos");
-        granate=new Room("Estoy en el entorno morado claro, aqui esta la otra mitad del cuadro");*/
+        /*------------------------------------------------------------------------------------------------------------------¬
+        turquesa=new Room("Estoy el entorno azul turquesa, hay dos personas sentadas ¡pero no tienen sillas!");             |
+        azul=new Room("Estoy en el entorno azul, hay dos sillas vacias");                                                   |
+        rojo=new Room("Estoy en el entorno rojo,me duelen los ojos y hay una mesa vacia");                                  |
+        verdeClaro=new Room("Estoy en el entorno verde claro, ¡hay dos tazas de cafe pegadas al techo !");                  |
+        verdeOscuro=new Room("Estoy en el entorno verde oscuro, hay una jarra llena de cafe...¡Suspendida en el aire!");    |
+        rosa=new Room("Este es un entorno rosa y horrible, hay un camarero descalzo");                                      |
+        morado=new Room("Estoy en el entorno morado, hay un cuadro cortado a la mitad");                                    |
+        neutro=new Room(" parece normal, pero no hay nada aparte de unos zapatos");                                         |
+        granate=new Room("Estoy en el entorno morado claro, aqui esta la otra mitad del cuadro");                           |
+        ------------------------------------------------------------------------------------------------------------------- 
+        */                         
 
         turquesa=new Room(" el entorno azul turquesa ");
         azul=new Room(" el entorno azul ");
@@ -99,18 +101,7 @@ public class Game
         morado.setExit("noreste", verdeOscuro);
         morado.setExit("sureste", azul);
 
-        morado.setExit("teleport_azul",rojo);
-
-        /**
-        turquesa.setExits(neutro, null, azul, null,rosa,rojo,null,null);
-        azul.setExits(turquesa, null, null, null,granate,morado,null,null);
-        rojo.setExits(null, granate, null, neutro,null,verdeClaro,turquesa,null);
-        neutro.setExits(verdeClaro,rojo,turquesa,rosa,null,null,null,null);
-        verdeClaro.setExits(verdeOscuro, null, neutro, null,null,null,rosa,rojo);
-        verdeOscuro.setExits(null, null, verdeClaro, null,null,null,morado,granate);
-        rosa.setExits(null, neutro, null, morado,verdeClaro,null,null,turquesa);
-        morado.setExits(null, rosa, null, null,verdeOscuro,null,null,azul);
-        granate.setExits(null,null , null, rojo,null,verdeOscuro,azul,null);*/
+        morado.setExit("teleport_azul",rojo);   
 
         currentRoom = neutro;  
 
@@ -175,6 +166,8 @@ public class Game
         String commandWord = command.getCommandWord();
         if (commandWord.equals("help")) {
             printHelp();
+            parser.solucionA().showAll();
+            parser.solucionB();
         }
         else if (commandWord.equals("go")) {
             goRoom(command);
@@ -184,6 +177,9 @@ public class Game
         }
         else if (commandWord.equals("look")) {
            printLocationInfo();
+        }
+          else if (commandWord.equals("eat")) {
+              System.out.println("You have eaten now and you are not hungry any more");
         }
 
         return wantToQuit;

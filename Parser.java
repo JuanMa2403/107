@@ -29,6 +29,8 @@ public class Parser
         commands = new CommandWords();
         reader = new Scanner(System.in);
     }
+    public CommandWords solucionA(){return commands;}
+    public void solucionB(){commands.showAll();}
 
     /**
      * @return The next command from the user.
