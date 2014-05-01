@@ -47,7 +47,52 @@ public class Game
         morado=new Room("Estoy en el entorno morado, hay un cuadro cortado a la mitad");
         neutro=new Room("Esto parece normal, pero no hay nada aparte de unos zapatos");
         granate=new Room("Estoy en el entorno morado claro, aqui esta la otra mitad del cuadro");
-
+        
+        
+        neutro.setExit("north", verdeClaro);
+        neutro.setExit("south", turquesa);
+        neutro.setExit("west", rosa);
+        neutro.setExit("east", rojo);
+        
+        turquesa.setExit("north", neutro);
+        turquesa.setExit("south", azul);
+        turquesa.setExit("noroeste", rosa);
+        turquesa.setExit("noreste", rojo);
+        
+        rojo.setExit("west", neutro);
+        rojo.setExit("east", granate);
+        rojo.setExit("noroeste", verdeClaro);
+        rojo.setExit("suroeste", turquesa);
+        
+        rosa.setExit("west", morado);
+        rosa.setExit("east", neutro);
+        rosa.setExit("noreste", verdeClaro);
+        rosa.setExit("sureste", turquesa);
+        
+        verdeClaro.setExit("north", verdeOscuro);
+        verdeClaro.setExit("south", neutro);
+        verdeClaro.setExit("sureste", rojo);
+        verdeClaro.setExit("suroeste", rosa);
+        
+        verdeOscuro.setExit("south", verdeClaro);
+        verdeOscuro.setExit("sureste", granate);
+        verdeOscuro.setExit("suroeste", morado);
+        
+        granate.setExit("west", rojo);
+        granate.setExit("suroeste", azul);
+        granate.setExit("noroeste", verdeOscuro);
+        
+        azul.setExit("north", turquesa);
+        azul.setExit("noroeste", morado);
+        azul.setExit("noreste", granate);
+        
+        morado.setExit("east", rosa);
+        morado.setExit("noreste", verdeOscuro);
+        morado.setExit("sureste", azul);
+        
+        morado.setExit("teleport_azul",rojo);
+        
+        /**
         turquesa.setExits(neutro, null, azul, null,rosa,rojo,null,null);
         azul.setExits(turquesa, null, null, null,granate,morado,null,null);
         rojo.setExits(null, granate, null, neutro,null,verdeClaro,turquesa,null);
@@ -56,7 +101,7 @@ public class Game
         verdeOscuro.setExits(null, null, verdeClaro, null,null,null,morado,granate);
         rosa.setExits(null, neutro, null, morado,verdeClaro,null,null,turquesa);
         morado.setExits(null, rosa, null, null,verdeOscuro,null,null,azul);
-        granate.setExits(null,null , null, rojo,null,verdeOscuro,azul,null);
+        granate.setExits(null,null , null, rojo,null,verdeOscuro,azul,null);*/
 
         currentRoom = neutro;  
 

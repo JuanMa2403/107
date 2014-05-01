@@ -13,6 +13,7 @@
  * @version 2011.07.31
  */
 import java.util.HashMap;
+import java.util.Set;
 public class Room 
 {
     private String description;
@@ -65,6 +66,10 @@ public class Room
             mapDesalidas.put("suroeste", SO);
 
     }
+    public void setExit(String clave,Room estancia)
+    {
+        mapDesalidas.put(clave, estancia);
+    }
     /**
      * @return The description of the room.
      */
@@ -75,23 +80,19 @@ public class Room
 
     public String getExitString()
     {   String lasSalidas=" ";
+        Set <String> salidas=mapDesalidas.keySet();
+       
 
-        String[] salidas={" Norte"," Este"," Sur"," Oeste"," Noreste"," Noroeste"," Sureste"," Suroeste"};
-        String[] salidas2={"north","east","south","west","noreste","noroeste","sureste","suroeste"};
-        Room[] salidasDeroom={northExit,southExit,eastExit,westExit,suresteSale,suroesteSale,noresteSale,noroesteSale};
-
-        for(int i=0;i<salidasDeroom.length;i++){
-            if(/*salidasDeroom[i]!=null*/mapDesalidas.get(salidas2[i])!=null){
-                lasSalidas=lasSalidas + salidas[i];
-            }
+        for(String sal:salidas){
+            lasSalidas+=sal+" ";
         }
         return lasSalidas;
     }
 
     public Room getExits(String salida)
     {
-        Room salidaDeRoom=null;
-
+        //Room salidaDeRoom=null;
+/*
         if(salida.equals("north")){
             salidaDeRoom=mapDesalidas.get("north");
         }
@@ -115,8 +116,8 @@ public class Room
         }
         if(salida.equals("west")){
             salidaDeRoom=mapDesalidas.get("west");
-        }    
+        }    */
 
-        return salidaDeRoom;
+        return mapDesalidas.get(salida);
     }
 }
