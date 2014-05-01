@@ -107,33 +107,6 @@ public class Room
 
     public Room getExits(String salida)
     {
-        //Room salidaDeRoom=null;
-        /*
-        if(salida.equals("north")){
-        salidaDeRoom=mapDesalidas.get("north");
-        }
-        if(salida.equals("east")){
-        salidaDeRoom=mapDesalidas.get("east");
-        }
-        if(salida.equals("sureste")){
-        salidaDeRoom=mapDesalidas.get("sureste");
-        }
-        if(salida.equals("noreste")){
-        salidaDeRoom=mapDesalidas.get("noreste");
-        }
-        if(salida.equals("suroeste")){
-        salidaDeRoom=mapDesalidas.get("suroeste");
-        }
-        if(salida.equals("noroeste")){
-        salidaDeRoom=mapDesalidas.get("noroeste");
-        }
-        if(salida.equals("south")){
-        salidaDeRoom=mapDesalidas.get("south");
-        }
-        if(salida.equals("west")){
-        salidaDeRoom=mapDesalidas.get("west");
-        }    */
-
         return mapDesalidas.get(salida);
     }
 }

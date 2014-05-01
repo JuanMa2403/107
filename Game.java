@@ -47,8 +47,7 @@ public class Game
         morado=new Room("Estoy en el entorno morado, hay un cuadro cortado a la mitad");
         neutro=new Room(" parece normal, pero no hay nada aparte de unos zapatos");
         granate=new Room("Estoy en el entorno morado claro, aqui esta la otra mitad del cuadro");*/
-        
-        
+
         turquesa=new Room(" el entorno azul turquesa ");
         azul=new Room(" el entorno azul ");
         rojo=new Room(" el entorno rojo ");
@@ -58,51 +57,50 @@ public class Game
         morado=new Room(" el entorno morado ");
         neutro=new Room(" el lugar original ");
         granate=new Room(" el entorno morado claro ");
-        
-        
+
         neutro.setExit("north", verdeClaro);
         neutro.setExit("south", turquesa);
         neutro.setExit("west", rosa);
         neutro.setExit("east", rojo);
-        
+
         turquesa.setExit("north", neutro);
         turquesa.setExit("south", azul);
         turquesa.setExit("noroeste", rosa);
         turquesa.setExit("noreste", rojo);
-        
+
         rojo.setExit("west", neutro);
         rojo.setExit("east", granate);
         rojo.setExit("noroeste", verdeClaro);
         rojo.setExit("suroeste", turquesa);
-        
+
         rosa.setExit("west", morado);
         rosa.setExit("east", neutro);
         rosa.setExit("noreste", verdeClaro);
         rosa.setExit("sureste", turquesa);
-        
+
         verdeClaro.setExit("north", verdeOscuro);
         verdeClaro.setExit("south", neutro);
         verdeClaro.setExit("sureste", rojo);
         verdeClaro.setExit("suroeste", rosa);
-        
+
         verdeOscuro.setExit("south", verdeClaro);
         verdeOscuro.setExit("sureste", granate);
         verdeOscuro.setExit("suroeste", morado);
-        
+
         granate.setExit("west", rojo);
         granate.setExit("suroeste", azul);
         granate.setExit("noroeste", verdeOscuro);
-        
+
         azul.setExit("north", turquesa);
         azul.setExit("noroeste", morado);
         azul.setExit("noreste", granate);
-        
+
         morado.setExit("east", rosa);
         morado.setExit("noreste", verdeOscuro);
         morado.setExit("sureste", azul);
-        
+
         morado.setExit("teleport_azul",rojo);
-        
+
         /**
         turquesa.setExits(neutro, null, azul, null,rosa,rojo,null,null);
         azul.setExits(turquesa, null, null, null,granate,morado,null,null);
@@ -148,8 +146,8 @@ public class Game
     {
         System.out.println();
         System.out.println("Bienvenido World of Zuul!");
-        System.out.println("World of Zuul, persigues a un mago que te ha robado un amuleto");
-        System.out.println("para que no consigas atraparlo ha congelado el tiempo");
+        System.out.println("World of Zuul, persigo a un mago que me ha robado un amuleto");
+        System.out.println("para que no consiga atraparlo ha congelado el tiempo");
         System.out.println("Al hacerlo la realidad se fragmento y debo reunir los objetos ");
         System.out.println("que encuentre para recomponer la situacion a su forma previa,  ");
         System.out.println("así el tiempo volvera a desbloquearse");
@@ -183,6 +181,9 @@ public class Game
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
+        }
+        else if (commandWord.equals("look")) {
+           printLocationInfo();
         }
 
         return wantToQuit;
@@ -229,6 +230,7 @@ public class Game
             printLocationInfo();
         }
     }
+
 
     /** 
      * "Quit" was entered. Check the rest of the command to see
