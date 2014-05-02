@@ -33,6 +33,8 @@ public class Parser
     /**
      * @return The next command from the user.
      */
+    public CommandWords solucionA(){return commands;}
+    public void solucionB(){commands.showAll();}
     public Command getCommand() 
     {
         String inputLine;   // will hold the full input line
