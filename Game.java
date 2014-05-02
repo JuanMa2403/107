@@ -99,18 +99,7 @@ public class Game
         morado.setExit("noreste", verdeOscuro);
         morado.setExit("sureste", azul);
 
-        morado.setExit("teleport_azul",rojo);
-
-        /**
-        turquesa.setExits(neutro, null, azul, null,rosa,rojo,null,null);
-        azul.setExits(turquesa, null, null, null,granate,morado,null,null);
-        rojo.setExits(null, granate, null, neutro,null,verdeClaro,turquesa,null);
-        neutro.setExits(verdeClaro,rojo,turquesa,rosa,null,null,null,null);
-        verdeClaro.setExits(verdeOscuro, null, neutro, null,null,null,rosa,rojo);
-        verdeOscuro.setExits(null, null, verdeClaro, null,null,null,morado,granate);
-        rosa.setExits(null, neutro, null, morado,verdeClaro,null,null,turquesa);
-        morado.setExits(null, rosa, null, null,verdeOscuro,null,null,azul);
-        granate.setExits(null,null , null, rojo,null,verdeOscuro,azul,null);*/
+        morado.setExit("teleport_azul",rojo);   
 
         currentRoom = neutro;  
 

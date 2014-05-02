@@ -88,9 +88,7 @@ public class Room
      */
     public String getLongDescription()
     {
-        String describe="";
-        System.out.println("Estoy en: ");
-        System.out.println("Salidas: ");
+       
         
         return "Estoy en " +getDescription()+ ".\n" +"Salidas:";
     }
