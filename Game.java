@@ -61,7 +61,7 @@ public class Game
         morado=new Room(" el entorno morado ");
         neutro=new Room(" el lugar original ");
         granate=new Room(" el entorno morado claro ");
-
+        
         neutro.setExit("north", verdeClaro);
         neutro.setExit("south", turquesa);
         neutro.setExit("west", rosa);
@@ -124,7 +124,7 @@ public class Game
     public void play() 
     {            
         printWelcome();
-        visitadas.add(_e_)
+        
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
 
@@ -171,7 +171,7 @@ public class Game
     private boolean processCommand(Command command) 
     {
         boolean wantToQuit = false;
-
+       visitadas.add(currentRoom);
         if(command.isUnknown()) {
             System.out.println("I don't know what you mean...");
             return false;
@@ -199,6 +199,7 @@ public class Game
         }
          else if (commandWord.equals("back")) {
               currentRoom=visitadas.get(visitadas.size()-1);
+              printLocationInfo();
         }
 
         
