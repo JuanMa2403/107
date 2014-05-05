@@ -14,12 +14,12 @@
  * @author  Michael Kölling and David J. Barnes
  * @version 2011.07.31
  */
-
+import java.util.ArrayList;
 public class Game 
 {
     private Parser parser;
     private Room currentRoom;
-
+    private ArrayList<Room> visitadas;
     /**
      * Create the game and initialise its internal map.
      */
@@ -27,6 +27,8 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        visitadas=new ArrayList<Room>();
+       
     }
 
     /**
@@ -111,7 +113,8 @@ public class Game
         neutro.addItem("colillas", 0);
         neutro.addItem("pelota", 1);
 
-        currentRoom = neutro;  
+        currentRoom = neutro;
+        
 
     }
 
@@ -121,7 +124,7 @@ public class Game
     public void play() 
     {            
         printWelcome();
-
+        visitadas.add(_e_)
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
 
@@ -182,6 +185,7 @@ public class Game
         }
         else if (commandWord.equals("go")) {
             goRoom(command);
+            visitadas.add(currentRoom);
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
@@ -192,6 +196,9 @@ public class Game
 
           else if (commandWord.equals("eat")) {
               System.out.println("You have eaten now and you are not hungry any more");
+        }
+         else if (commandWord.equals("back")) {
+              currentRoom=visitadas.get(visitadas.size()-1);
         }
 
         
