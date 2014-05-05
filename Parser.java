@@ -35,6 +35,7 @@ public class Parser
     /**
      * @return The next command from the user.
      */
+
     public Command getCommand() 
     {
         String inputLine;   // will hold the full input line

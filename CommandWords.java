@@ -28,7 +28,11 @@ public class CommandWords
      * Print all valid commands to System.out
      */
     public void showAll(){
+
         System.out.println("Comandos: ");
+
+        System.out.println("Comandos:");
+
         for(int i=0;i<validCommands.length;i++){
             System.out.println(validCommands[i]);
         }

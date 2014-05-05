@@ -120,13 +120,14 @@ public class Game
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
+            currentRoom.asignaObjeto();
             finished = processCommand(command);
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
 
     private void printLocationInfo(){       
-        System.out.print(currentRoom.getLongDescription() + currentRoom.getExitString());      
+        System.out.print(currentRoom.getLongDescription() + currentRoom.getExitString()+ " "+currentRoom.asignaObjeto());      
         System.out.println();
     }
 
@@ -178,9 +179,16 @@ public class Game
         else if (commandWord.equals("look")) {
            printLocationInfo();
         }
+
           else if (commandWord.equals("eat")) {
               System.out.println("You have eaten now and you are not hungry any more");
         }
+
+         else if (commandWord.equals("eat")) {
+          System.out.println("You have eaten now and you are not hungry any more");
+        }
+        
+
 
         return wantToQuit;
     }
@@ -199,6 +207,9 @@ public class Game
         System.out.println();
         System.out.println("Your command words are:");
         System.out.println("   go quit help");
+        
+        parser.solucionA().showAll();//Solucion A Ac0116        
+        parser.solucionB();//Solucion B Ac0116
     }
 
     /** 
