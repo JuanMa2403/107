@@ -101,7 +101,15 @@ public class Game
         morado.setExit("noreste", verdeOscuro);
         morado.setExit("sureste", azul);
 
-        morado.setExit("teleport_azul",rojo);   
+        morado.setExit("teleport_azul",rojo);
+        
+        
+        
+        // Objetos a las habitaciones
+        
+        neutro.addItem("zapatos", 2);
+        neutro.addItem("colillas", 0);
+        neutro.addItem("pelota", 1);
 
         currentRoom = neutro;  
 
@@ -120,16 +128,18 @@ public class Game
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
-            currentRoom.asignaObjeto();
+            
             finished = processCommand(command);
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
 
     private void printLocationInfo(){       
-        System.out.print(currentRoom.getLongDescription() + currentRoom.getExitString()+ " "+currentRoom.asignaObjeto());      
+        System.out.print(currentRoom.getLongDescription() + currentRoom.getExitString()); 
+        currentRoom.printItems();
         System.out.println();
     }
+    
 
     /**
      * Print out the opening message for the player.
@@ -184,9 +194,7 @@ public class Game
               System.out.println("You have eaten now and you are not hungry any more");
         }
 
-         else if (commandWord.equals("eat")) {
-          System.out.println("You have eaten now and you are not hungry any more");
-        }
+        
         
 
 

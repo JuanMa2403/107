@@ -14,13 +14,13 @@
  */
 import java.util.HashMap;
 import java.util.Set;
+import java.util.ArrayList;
 public class Room 
 {
     private String description;  
     private HashMap<String,Room> mapDesalidas;   
-    private String descripcion;
-    private int peso;
-    
+   
+    private  ArrayList<Item> items;
 
     /**
      * Create a room described "description". Initially, it has
@@ -32,59 +32,27 @@ public class Room
     {
         this.description = description;
         mapDesalidas=new HashMap<String,Room>();
-     
+        items=new ArrayList<Item>();
         // objetos=new HashMap<String,Integer>();
     }
-
-    /**
-     * Define the exits of this room.  Every direction either leads
-     * to another room or is null (no exit there).
-     * @param north The north exit.
-     * @param east The east east.
-     * @param south The south exit.
-     * @param west The west exit.
+    /** Añade un Item a la Room
+     * @param descripcion
+     * @param peso
+       */
+    public void addItem(String descripcion,int peso)
+    {
+        items.add(new Item(descripcion,peso));
+    }
+      /**
+     * imprime los items.
      */
-    public String asignaObjeto()
-
-    {       
-        if(description.equals(" el entorno azul turquesa ")){ 
-            descripcion="personas";
-         
-            peso=130;
+    public void printItems(){
+        System.out.println("\nObjetos: ");
+        
+        for(int i=0;i<items.size();i++)
+        {
+            System.out.println(items.get(i).getDescripcion()+" "+ items.get(i).getPeso()+" kilos");
         }
-        else if(description.equals(" el entorno azul ")){
-            descripcion="sillas";
-            peso=20;
-        }
-        else  if(description.equals(" el entorno rojo ")){  
-            descripcion="mesa";
-            peso=30;
-        }
-        else  if(description.equals(" el entorno verde claro ")){ 
-            descripcion="tazas";
-            peso=1;
-        }
-        else  if(description.equals(" el entorno verde oscuro ")){ 
-            descripcion="jarra";
-            peso=2;
-        }
-        else  if(description.equals(" el entorno rosa ")){  
-            descripcion="camarero";
-            peso=70;
-        }
-        else  if(description.equals(" el entorno morado ")){  
-            descripcion="cuadro cortado";
-            peso=1;
-        }
-        else  if(description.equals(" el lugar original ")){ 
-            descripcion="zapatos";
-            peso=1;
-        }
-        else  if(description.equals(" el entorno morado claro ")){ 
-            descripcion="otra mitad del cuadro";
-            peso=1;
-        }
-        return descripcion+". "+"Pesa "+" "+peso +" Kilos";
     }
 
     public void setExit(String clave,Room estancia)
@@ -102,10 +70,8 @@ public class Room
     }
 
     /**
-     * Return a long description of this room, of the form:
-     *     You are in the 'name of room'
-     *     Exits: north west southwest
-     * @return A description of the room, including exits.
+     * 
+     * @return A LongDescription of the room, including exits.
      */
     public String getLongDescription()
     {  
