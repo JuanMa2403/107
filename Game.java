@@ -29,7 +29,7 @@ public class Game
         createRooms();
         parser = new Parser();
         visitadas=new ArrayList<Room>();       
-        visitadas.add(currentRoom);
+        
     }
 
     /**
@@ -246,11 +246,12 @@ public class Game
    
         // Try to leave current room.
         Room nextRoom = currentRoom.getExits(direction); 
-        visitadas.add(currentRoom);
+       
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
         else {
+            visitadas.add(currentRoom);
             currentRoom = nextRoom;        
             printLocationInfo();
         }
