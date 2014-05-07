@@ -20,6 +20,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private ArrayList<Room> visitadas;
+    private int indiceRoom;
     /**
      * Create the game and initialise its internal map.
      */
@@ -27,8 +28,8 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        visitadas=new ArrayList<Room>();
-       
+        visitadas=new ArrayList<Room>();       
+        visitadas.add(currentRoom);
     }
 
     /**
@@ -36,7 +37,7 @@ public class Game
      */
     private void createRooms()
     {
-      
+
         Room turquesa, azul, rojo, granate, verdeClaro,verdeOscuro,rosa, morado, neutro;
         // create the rooms       
         /*------------------------------------------------------------------------------------------------------------------¬
@@ -50,7 +51,7 @@ public class Game
         neutro=new Room(" parece normal, pero no hay nada aparte de unos zapatos");                                         |
         granate=new Room("Estoy en el entorno morado claro, aqui esta la otra mitad del cuadro");                           |
         ------------------------------------------------------------------------------------------------------------------- 
-        */                         
+         */                         
 
         turquesa=new Room(" el entorno azul turquesa ");
         azul=new Room(" el entorno azul ");
@@ -61,7 +62,7 @@ public class Game
         morado=new Room(" el entorno morado ");
         neutro=new Room(" el lugar original ");
         granate=new Room(" el entorno morado claro ");
-        
+
         neutro.setExit("north", verdeClaro);
         neutro.setExit("south", turquesa);
         neutro.setExit("west", rosa);
@@ -104,20 +105,17 @@ public class Game
         morado.setExit("sureste", azul);
 
         morado.setExit("teleport_azul",rojo);
-        
-        
+
         
         // Objetos a las habitaciones
-        
+
         neutro.addItem("zapatos", 2);
         neutro.addItem("colillas", 0);
         neutro.addItem("pelota", 1);
 
         currentRoom = neutro;
-        
-
+      
     }
-
     /**
      *  Main play routine.  Loops until end of play.
      */
@@ -131,7 +129,7 @@ public class Game
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
-            
+
             finished = processCommand(command);
         }
         System.out.println("Thank you for playing.  Good bye.");
@@ -142,7 +140,6 @@ public class Game
         currentRoom.printItems();
         System.out.println();
     }
-    
 
     /**
      * Print out the opening message for the player.
@@ -159,7 +156,7 @@ public class Game
         System.out.println();
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-
+       
         printLocationInfo();
     }
 
@@ -171,7 +168,7 @@ public class Game
     private boolean processCommand(Command command) 
     {
         boolean wantToQuit = false;
-       visitadas.add(currentRoom);
+       
         if(command.isUnknown()) {
             System.out.println("I don't know what you mean...");
             return false;
@@ -185,26 +182,31 @@ public class Game
         }
         else if (commandWord.equals("go")) {
             goRoom(command);
-            visitadas.add(currentRoom);
+          
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
         else if (commandWord.equals("look")) {
-           printLocationInfo();
+            printLocationInfo();
         }
 
-          else if (commandWord.equals("eat")) {
-              System.out.println("You have eaten now and you are not hungry any more");
+        else if (commandWord.equals("eat")) {
+            System.out.println("You have eaten now and you are not hungry any more");
         }
-         else if (commandWord.equals("back")) {
-              currentRoom=visitadas.get(visitadas.size()-1);
-              printLocationInfo();
+        else if (commandWord.equals("back")) {
+            
+               if(visitadas.size()>0){
+                currentRoom=visitadas.get(visitadas.size()-1);
+                printLocationInfo();
+                visitadas.remove(visitadas.size()-1);
+                
+            }
+             
+            
         }
 
         
-        
-
 
         return wantToQuit;
     }
@@ -223,7 +225,7 @@ public class Game
         System.out.println();
         System.out.println("Your command words are:");
         System.out.println("   go quit help");
-        
+
         parser.solucionA().showAll();//Solucion A Ac0116        
         parser.solucionB();//Solucion B Ac0116
     }
@@ -241,10 +243,10 @@ public class Game
         }
 
         String direction = command.getSecondWord();
-
+   
         // Try to leave current room.
         Room nextRoom = currentRoom.getExits(direction); 
-
+        visitadas.add(currentRoom);
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
@@ -253,7 +255,6 @@ public class Game
             printLocationInfo();
         }
     }
-
 
     /** 
      * "Quit" was entered. Check the rest of the command to see
