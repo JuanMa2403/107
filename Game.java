@@ -20,7 +20,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private ArrayList<Room> visitadas;
-    private int indiceRoom;
+    private Player jugador;
     /**
      * Create the game and initialise its internal map.
      */
@@ -29,7 +29,7 @@ public class Game
         createRooms();
         parser = new Parser();
         visitadas=new ArrayList<Room>();       
-        
+        jugador=new Player(currentRoom);
     }
 
     /**
@@ -201,8 +201,17 @@ public class Game
                 printLocationInfo();
                 visitadas.remove(visitadas.size()-1);
                 
-            }
-             
+            }            
+            
+        }
+           else if (commandWord.equals("take")) {
+            
+             takeObject(command);
+            
+        }
+            else if (commandWord.equals("drop")) {
+            
+             dropObject(command);
             
         }
 
@@ -234,6 +243,46 @@ public class Game
      * Try to go in one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
      */
+    private void takeObject(Command command)
+    {
+       if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Coger que?");
+            return;
+        }
+        
+        
+       String descripcion = command.getSecondWord();   
+       jugador.addItem(currentRoom.getItem(descripcion));
+         if (currentRoom.getItem(descripcion) == null) {
+            System.out.println("No hay");
+        }
+        else{ currentRoom.borraObjeto(currentRoom.getItem(descripcion)); }
+      
+    }
+    
+    
+        private void dropObject(Command command)
+    {
+       if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("tirar que?");
+            return;
+        }
+        
+        
+       String descripcion = command.getSecondWord(); 
+       currentRoom.addItem(jugador.getItem(descripcion));
+       if (jugador.getItem(descripcion) == null) {
+            System.out.println("No tengo");
+        }
+        else{ jugador.borrarItem(jugador.getItem(descripcion)); }
+       //jugador.borrarItem(jugador.getItem(descripcion));       
+       
+       
+       
+    }
+    
     private void goRoom(Command command) 
     {
         if(!command.hasSecondWord()) {
@@ -252,7 +301,8 @@ public class Game
         }
         else {
             visitadas.add(currentRoom);
-            currentRoom = nextRoom;        
+            currentRoom = nextRoom;
+            jugador.setEstancia(currentRoom);
             printLocationInfo();
         }
     }

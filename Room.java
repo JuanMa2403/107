@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class Room 
 {
     private String description;  
-    private HashMap<String,Room> mapDesalidas;   
+    private HashMap<String,Room> mapDesalidas; 
    
     private  ArrayList<Item> items;
 
@@ -42,6 +42,10 @@ public class Room
     public void addItem(String descripcion,int peso)
     {
         items.add(new Item(descripcion,peso));
+    }
+       public void addItem(Item item)
+    {
+        items.add(item);
     }
       /**
      * imprime los items.
@@ -77,6 +81,27 @@ public class Room
     {  
         
         return "Estoy en " +description+ ".\n" +"Salidas:";
+    }
+    
+    public Item getItem(String describe)
+    {
+        Item obj=null;
+        for(int i=0;i<items.size();i++)
+       {    if(items.get(i)!=null){            
+            if(items.get(i).getDescripcion().equals(describe))
+            {
+                obj=items.get(i);
+            }            
+        }
+        else{items.remove(i);}
+    }
+        
+        return obj;
+    }
+    
+    public void borraObjeto(Item item)
+    {
+        items.remove(item);
     }
 
     public String getExitString()
