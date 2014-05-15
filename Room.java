@@ -55,6 +55,7 @@ public class Room
         
         for(int i=0;i<items.size();i++)
         {
+            if(items.get(i)!=null)
             System.out.println(items.get(i).getDescripcion()+" "+ items.get(i).getPeso()+" kilos");
         }
     }

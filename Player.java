@@ -110,10 +110,28 @@ public class Player
         //jugador.borrarItem(jugador.getItem(descripcion));       
 
     }
+
     private void printLocationInfo(){       
         System.out.print(estancia.getLongDescription() + estancia.getExitString()); 
         estancia.printItems();
         System.out.println();
+    }
+
+    private void printInventario(){       
+        if(inventario.size()>0){
+            for(int i=0;i<inventario.size();i++)
+            {
+                System.out.println(inventario.get(i).getDescripcion());
+            }
+        }
+        else{
+            System.out.println("No llevo nada");
+        }
+    }
+    
+    public Room getEstancia()
+    {
+        return estancia;
     }
 
     private void goRoom(Command command) 
@@ -183,7 +201,9 @@ public class Player
             dropObject(command);
 
         }
-
+        else if(commandWord.equals("inventario")){
+            printInventario();
+        }
 
         return wantToQuit;
     }

@@ -109,15 +109,19 @@ public class Game
         // Objetos a las habitaciones
 
         neutro.addItem("zapatos", 2);
-        neutro.addItem("colillas", 0);
+        neutro.addItem("cartulinas", 0);
         neutro.addItem("pelota", 1);
         
-        rosa.addItem("mesa", 25);
+        rosa.addItem("mesa", 45);
         rosa.addItem("Trofeo", 10);
         rosa.addItem("Patines",5);
         
-        morado.addItem("Saco",40);
-        morado.addItem("Jarron",10);
+        morado.addItem("patinadora",40);
+        morado.addItem("silla",10);
+        
+        verdeOscuro.addItem("silla",10);
+        verdeOscuro.addItem("boligrafo",0);
+        granate.addItem("silla",10);
 
        jugador.setEstancia(neutro);
     }
@@ -141,6 +145,14 @@ public class Game
     }
 
 
+    private boolean objetivo()
+    {
+        boolean conseguido=false;
+        
+          //PENDIENTE DE HACER
+        
+        return conseguido;
+    }
 
     /**
      * Print out the opening message for the player.
