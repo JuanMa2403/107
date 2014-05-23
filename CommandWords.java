@@ -8,34 +8,74 @@
  * @author  Michael Kölling and David J. Barnes
  * @version 2011.07.31
  */
+import java.util.HashMap;
+import java.util.Set;
 
 public class CommandWords
 {
     // a constant array that holds all valid command words
-    private static final String[] validCommands = {
-            "go", "quit", "help","look","eat","back","take","drop","inventario"
-        };
+
+    private HashMap<String,Option> validCommands; 
+    /*private static final String[] validCommands = {
+    "go", "quit", "help","look","eat","back","take","drop","inventario"
+
+    GO, QUIT,HELP ,LOOK ,EAT ,BACK, TAKE, DROP, INVENTARIO,UNKNOWN;  
+    };*/
 
     /**
      * Constructor - initialise the command words.
      */
     public CommandWords()
     {
+        validCommands=new HashMap<String,Option>();
+
+        validCommands.put("go", Option.GO);
+        validCommands.put("quit", Option.QUIT);
+        validCommands.put("help", Option.HELP); 
+        validCommands.put("look", Option.LOOK);          
+        validCommands.put("eat", Option.EAT);
+        validCommands.put("back", Option.BACK);
+        validCommands.put("take", Option.TAKE);
+        validCommands.put("drop", Option.DROP);
+        validCommands.put("inventario", Option.INVENTARIO);
+       
+
         // nothing to do at the moment...
     }
-
+    
     /**
      * Print all valid commands to System.out
      */
     public void showAll(){
 
         System.out.println("Comandos: ");
-
-        System.out.println("Comandos:");
-
-        for(int i=0;i<validCommands.length;i++){
-            System.out.println(validCommands[i]);
+        Set<String> comandos = validCommands.keySet();
+        for(String comando : comandos){
+            System.out.print(comando + " " );
         }
+        System.out.println();
+
+    }
+
+    /**
+     * Return the Option associated with a word.
+     * @param commandWord The word to look up (as a string).
+     * @return The Option correspondng to commandWord, or UNKNOWN
+     *         if it is not a valid command word.
+     */
+    public Option getCommandWord(String commandWord)
+    {
+        Option opcion=null;
+            if(isCommand(commandWord))
+            {
+                opcion= validCommands.get(commandWord);
+            }
+            else
+            {
+                opcion=Option.UNKNOWN;
+            }
+        
+        return  opcion;
     }
 
     /**
@@ -44,12 +84,7 @@ public class CommandWords
      * false if it isn't.
      */
     public boolean isCommand(String aString)
-    {
-        for(int i = 0; i < validCommands.length; i++) {
-            if(validCommands[i].equals(aString))
-                return true;
-        }
-        // if we get here, the string was not found in the commands
-        return false;
+    {        
+        return validCommands.containsKey(aString);
     }
 }

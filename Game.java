@@ -38,19 +38,7 @@ public class Game
     {
 
         Room turquesa, azul, rojo, granate, verdeClaro,verdeOscuro,rosa, morado, neutro, habitacion;
-        // create the rooms       
-        /*------------------------------------------------------------------------------------------------------------------¬
-        turquesa=new Room("Estoy el entorno azul turquesa, hay dos personas sentadas ¡pero no tienen sillas!");             |
-        azul=new Room("Estoy en el entorno azul, hay dos sillas vacias");                                                   |
-        rojo=new Room("Estoy en el entorno rojo,me duelen los ojos y hay una mesa vacia");                                  |
-        verdeClaro=new Room("Estoy en el entorno verde claro, ¡hay dos tazas de cafe pegadas al techo !");                  |
-        verdeOscuro=new Room("Estoy en el entorno verde oscuro, hay una jarra llena de cafe...¡Suspendida en el aire!");    |
-        rosa=new Room("Este es un entorno rosa y horrible, hay un camarero descalzo");                                      |
-        morado=new Room("Estoy en el entorno morado, hay un cuadro cortado a la mitad");                                    |
-        neutro=new Room(" parece normal, pero no hay nada aparte de unos zapatos");                                         |
-        granate=new Room("Estoy en el entorno morado claro, aqui esta la otra mitad del cuadro");                           |
-        ------------------------------------------------------------------------------------------------------------------- 
-         */                         
+                             
         habitacion=new Room(null);
         turquesa=new Room(" el entorno azul turquesa ");
         azul=new Room(" el entorno azul ");
@@ -109,19 +97,15 @@ public class Game
         // Objetos a las habitaciones
 
         neutro.addItem("zapatos", 2);
-        neutro.addItem("cartulinas", 0);
+        neutro.addItem("colillas", 0);
         neutro.addItem("pelota", 1);
         
-        rosa.addItem("mesa", 45);
+        rosa.addItem("mesa", 25);
         rosa.addItem("Trofeo", 10);
         rosa.addItem("Patines",5);
         
-        morado.addItem("patinadora",40);
-        morado.addItem("silla",10);
-        
-        verdeOscuro.addItem("silla",10);
-        verdeOscuro.addItem("boligrafo",0);
-        granate.addItem("silla",10);
+        morado.addItem("Saco",40);
+        morado.addItem("Jarron",10);
 
        jugador.setEstancia(neutro);
     }
@@ -138,21 +122,13 @@ public class Game
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
-            finished = (processCommand(command) || jugador.processCommand(command));
+            finished = (processCommand(command));
             
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
 
 
-    private boolean objetivo()
-    {
-        boolean conseguido=false;
-        
-          //PENDIENTE DE HACER
-        
-        return conseguido;
-    }
 
     /**
      * Print out the opening message for the player.
@@ -181,20 +157,59 @@ public class Game
     private boolean processCommand(Command command) 
     {
         boolean wantToQuit = false;
-       
-        if(command.isUnknown()) {
+        
+         Option commandWord = command.getCommandWord();
+        
+        /*  if(command.isUnknown()) {
             System.out.println("I don't know what you mean...");
             return false;
+        }*/
+        if (commandWord==Option.GO) {
+            jugador.goRoom(command);
+
         }
 
-        String commandWord = command.getCommandWord();
-        if (commandWord.equals("help")) {
+        else if (commandWord==Option.LOOK) {
+            jugador.printLocationInfo();
+        }
+
+        else if (commandWord==Option.EAT) {
+            System.out.println("You have eaten now and you are not hungry any more");
+        }
+        else if (commandWord==Option.BACK) {
+
+            if(jugador.visitadas().size()>0){
+                Room estancia=jugador.getEstancia();
+                estancia=jugador.visitadas().get(jugador.visitadas().size()-1);
+                jugador.printLocationInfo();
+                jugador.remover(jugador.visitadas().size()-1);
+            }            
+
+        }
+        else if (commandWord==Option.TAKE) {
+
+             jugador.takeObject(command);
+
+        }
+        else if (commandWord==Option.DROP) {
+
+             jugador.dropObject(command);
+
+        }
+        else if(commandWord==Option.INVENTARIO){
+             jugador.printInventario();
+        }
+       
+        
+        else if(commandWord==Option.UNKNOWN) {
+            System.out.println("I don't know what you mean...");
+            return false;
+        } 
+        if (commandWord==Option.HELP) {
             printHelp();
-            parser.solucionA().showAll();
-            parser.solucionB();
         }
      
-        else if (commandWord.equals("quit")) {
+        else if (commandWord==Option.QUIT) {
             wantToQuit = quit(command);
         } 
 
@@ -212,11 +227,7 @@ public class Game
     {
         System.out.println("You are lost. You are alone. You wander");
         System.out.println("around at the university.");
-        System.out.println();
-        System.out.println("Your command words are:");
-        System.out.println("   go quit help");
-
-        parser.solucionA().showAll();//Solucion A Ac0116        
+        System.out.println();              
         parser.solucionB();//Solucion B Ac0116
     }
 
