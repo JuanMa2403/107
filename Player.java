@@ -58,8 +58,18 @@ public class Player
     public void setEstancia(Room estaEn){
         estancia=estaEn;
     }
-
-    private int carga()
+      public Room getEstancia(){
+        return estancia;
+    }
+    public ArrayList<Room> visitadas()
+    {
+        return visitadas;
+    }
+    public void remover(int borra)
+    {
+         visitadas.remove(borra);
+    }
+    public int carga()
     {int carga=0;
         for(int i=0;i<inventario.size();i++)
         {
@@ -69,7 +79,7 @@ public class Player
 
     }
 
-    private void takeObject(Command command)
+    public void takeObject(Command command)
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
@@ -93,7 +103,7 @@ public class Player
 
     }
 
-    private void dropObject(Command command)
+    public void dropObject(Command command)
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
@@ -111,13 +121,13 @@ public class Player
 
     }
 
-    private void printLocationInfo(){       
+    public void printLocationInfo(){       
         System.out.print(estancia.getLongDescription() + estancia.getExitString()); 
         estancia.printItems();
         System.out.println();
     }
 
-    private void printInventario(){       
+    public void printInventario(){       
         if(inventario.size()>0){
             for(int i=0;i<inventario.size();i++)
             {
@@ -129,12 +139,9 @@ public class Player
         }
     }
     
-    public Room getEstancia()
-    {
-        return estancia;
-    }
+ 
 
-    private void goRoom(Command command) 
+    public void goRoom(Command command) 
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
@@ -158,53 +165,5 @@ public class Player
         }
     }
 
-    public boolean processCommand(Command command) 
-    {
-        boolean wantToQuit = false;
-
-        if(command.isUnknown()) {
-            System.out.println("I don't know what you mean...");
-            return false;
-        }
-
-        String commandWord = command.getCommandWord();
-
-        if (commandWord.equals("go")) {
-            goRoom(command);
-
-        }
-
-        else if (commandWord.equals("look")) {
-            printLocationInfo();
-        }
-
-        else if (commandWord.equals("eat")) {
-            System.out.println("You have eaten now and you are not hungry any more");
-        }
-        else if (commandWord.equals("back")) {
-
-            if(visitadas.size()>0){
-                estancia=visitadas.get(visitadas.size()-1);
-                printLocationInfo();
-                visitadas.remove(visitadas.size()-1);
-
-            }            
-
-        }
-        else if (commandWord.equals("take")) {
-
-            takeObject(command);
-
-        }
-        else if (commandWord.equals("drop")) {
-
-            dropObject(command);
-
-        }
-        else if(commandWord.equals("inventario")){
-            printInventario();
-        }
-
-        return wantToQuit;
-    }
+   
 }
